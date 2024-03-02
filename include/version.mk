@@ -29,7 +29,7 @@ VERSION_CODE:=$(call qstrip,$(CONFIG_VERSION_CODE))
 VERSION_CODE:=$(if $(VERSION_CODE),$(VERSION_CODE),$(REVISION))
 
 VERSION_REPO:=$(call qstrip,$(CONFIG_VERSION_REPO))
-VERSION_REPO:=$(if $(VERSION_REPO),$(VERSION_REPO),https://downloads.openwrt.org/releases/22.03-SNAPSHOT)
+VERSION_REPO:=$(if $(VERSION_REPO),$(VERSION_REPO),https://mirror.sjtu.edu.cn/openwrt/releases/22.03-SNAPSHOT/)
 
 VERSION_DIST:=$(call qstrip,$(CONFIG_VERSION_DIST))
 VERSION_DIST:=$(if $(VERSION_DIST),$(VERSION_DIST),OpenWrt)
@@ -55,6 +55,8 @@ VERSION_PRODUCT:=$(if $(VERSION_PRODUCT),$(VERSION_PRODUCT),Generic)
 
 VERSION_HWREV:=$(call qstrip,$(CONFIG_VERSION_HWREV))
 VERSION_HWREV:=$(if $(VERSION_HWREV),$(VERSION_HWREV),v0)
+
+PACKAGE_TIME:=$(shell date +"%Y-%m-%d %H:%M:%S")
 
 define taint2sym
 $(CONFIG_$(firstword $(subst :, ,$(subst +,,$(subst -,,$(1))))))
@@ -104,5 +106,6 @@ VERSION_SED_SCRIPT:=$(SED) 's,%U,$(call sed_escape,$(VERSION_REPO)),g' \
 	-e 's,%u,$(call sed_escape,$(VERSION_HOME_URL)),g' \
 	-e 's,%s,$(call sed_escape,$(VERSION_SUPPORT_URL)),g' \
 	-e 's,%P,$(call sed_escape,$(VERSION_PRODUCT)),g' \
-	-e 's,%h,$(call sed_escape,$(VERSION_HWREV)),g'
+	-e 's,%h,$(call sed_escape,$(VERSION_HWREV)),g'\
+	-e 's,%r,$(call sed_escape,$(PACKAGE_TIME)),g'
 
