@@ -1,0 +1,4 @@
+src-git-full packages https://gitee.com/sv_openwrt/packages.git;openwrt-22.03
+src-git-full luci https://gitee.com/sv_openwrt/luci.git;openwrt-22.03
+src-git-full routing https://gitee.com/sv_openwrt/routing.git;openwrt-22.03
+src-git-full telephony https://gitee.com/sv_openwrt/telephony.git;openwrt-22.03
